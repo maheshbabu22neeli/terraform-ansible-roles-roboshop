@@ -1,23 +1,6 @@
-# 1. hard the secrets     (success).                            - Not recommended
-# MYSQL_ROOT_PASSWORD: RoboShop@1
-
-# 2. Store in the group_vars/mysql/valut.yaml  (success).       - Not recommended
-
-# 3. Store in EC2 file location and tell ansible to pick from there.     (Failed)   - Not recommended
-  #  54.165.226.136 | 172.31.23.10 | t3.micro | null
-  # [ ec2-user@ip-172-31-23-10 ~/.ansible ]$ touch .mysql_vault
-
-  # 54.165.226.136 | 172.31.23.10 | t3.micro | null
-  # [ ec2-user@ip-172-31-23-10 ~/.ansible ]$ echo "DevOps321" > .mysql_vault
-
-  #  54.165.226.136 | 172.31.23.10 | t3.micro | null
-  #  [ ec2-user@ip-172-31-23-10 ~/.ansible ]$ cat .mysql_vault
-  # DevOps321
+# Store in SSM param (Highly recommended)     (Success)              - Highly recommended
+# MYSQL_ROOT_PASSWORD: "{{ lookup('amazon.aws.aws_ssm', '/roboshop-mysql-dev/mysql_root_password', region='us-east-1') }}"
 
 
-# 3. Store in SSM param (Highly recommended)     (Success)              - Highly recommended
-MYSQL_ROOT_PASSWORD: "{{ lookup('amazon.aws.aws_ssm', '/roboshop-mysql-dev/mysql_root_password', region='us-east-1') }}"
-
-
-# 4. Store in Secrets Manager (Highly recommended)     (Success)        - Highly recommended
+# Store in Secrets Manager (Highly recommended)     (Success)        - Highly recommended
 #MYSQL_ROOT_PASSWORD: "{{ (lookup('amazon.aws.aws_secret', '/roboshop-mysql-dev/mysql_rootPassword', region='us-east-1') | from_json ).MYSQL_ROOT_PASSWORD }}"
