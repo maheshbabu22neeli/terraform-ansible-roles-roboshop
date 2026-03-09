@@ -1,0 +1,2 @@
+# Store in SSM param (Highly recommended)     (Success)              - Highly recommended
+RABBIT_MQ_ROOT_PASSWORD: "{{ lookup('amazon.aws.aws_ssm', '/roboshop-rabbitmq-${ENV}/rabbitmq_password', region='us-east-1') }}"
