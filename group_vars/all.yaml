@@ -10,3 +10,5 @@ SHIPPING_HOST: shipping-{{ ENV }}.neeli.online
 RABBITMQ_HOST: rabbitmq-{{ ENV }}.neeli.online
 PAYMENT_HOST: payment-{{ ENV }}.neeli.online
 FRONTEND_HOST: frontend-{{ ENV }}.neeli.online
+# the app version will be overridden by bootstrap.sh file
+APP_VERSION: v3
